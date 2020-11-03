@@ -17,6 +17,11 @@ by Rémi BARNAT
 ### En prod sur le web
 https://event-ually.herokuapp.com/
 
+### Vérifier les envois de mails
+* Se rendre sur http://www.yopmail.com/
+* tappez l'email dont on veut vérifier la boite mail en haut à gauche
+* Visualiser l'email !
+
 ## Le Projet
 L'application sera une version minimaliste (mais fonctionnelle, c'est le plus important) d'Eventbrite, un site qui propose plein d'événements que tu peux rejoindre. Les événements ne concernent qu'une seule ville, la ville où tu te trouves. Voici ce que tu peux faire :
 
