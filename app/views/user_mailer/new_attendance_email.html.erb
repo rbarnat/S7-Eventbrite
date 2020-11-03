@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Salut <%= @event.event_admin.first_name + " " + @event.event_admin.last_name %> !</h1>
+    <p>
+      Une nouvelle personne s'est inscrite sur ton événement : <%= @event.title %>.
+    </p>
+    <p>
+      Voici celui qui s'est inscrit : <%= @user.first_name + " " + @user.last_name %>.
+    </p>
+    <p>
+      Pour accéder à ton événement, connecte-toi via : <%= @url %>.
+    </p>
+    <p> À très vite sur event-ually.herokuapp.com !
+  </body>
+</html>
