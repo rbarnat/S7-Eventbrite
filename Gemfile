@@ -55,11 +55,8 @@ group :development do
   gem 'binding_of_caller'
   gem 'letter_opener'
 end
-# gem 'execjs'
-# gem 'therubyracer'
 gem 'table_print'
 gem 'faker'
 gem 'dotenv-rails'
 gem 'bcrypt'
-gem 'jquery-rails'
-gem 'bootstrap'
+gem 'devise'

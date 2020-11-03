@@ -15,7 +15,81 @@
   </head>
 
   <body>
+  <!-- HEADER-->
+    <header>
+      <!-- BARRE DE NAVIGATION -->
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <p class="navbar-brand">
+          <a class="navbar-brand" href="<%= root_path %>">EvenTually</a>
+        </p>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExample04">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <p class="nav-link">
+                <a class="nav-link" href="<%= root_path %>">Accueil</a>
+              </p>
+            </li>
+            <li class="nav-item">
+              <p class="nav-link">
+                <a class="nav-link" href="<%= new_event_path %>">Créer un événement</a>
+              </p>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-md-0">
+            <ul class="navbar-nav mr-auto">
+              <% if user_signed_in? %>
+              <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Mon profil
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a href="<%= edit_user_registration_path(current_user.id) %>" class="dropdown-item" href="#">Mon profil</a>
+                    <a href="<%= destroy_user_session_path(session[:user_id]) %>" data-confirm="Etes-vous sur de vouloir vous déconnecter ?" data-method="DELETE" class="dropdown-item">Se déconnecter</a>
+                  </div>
+                </div>
+              <% else %>
+                <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    S'inscrire / Se connecter
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a href="<%= new_user_registration_path %>" class="dropdown-item" href="#">S'inscrire</a>
+                    <a href="<%= new_user_session_path %>" class="dropdown-item" href="#">Se connecter</a>
+                  </div>
+                </div>
+              <% end %>
+              
+            </ul>
+            <!--<input class="form-control" type="text" placeholder="Search">-->
+          </form>
+        </div>
+      </nav>
+
+      <!-- MESSAGES -->
+      <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+      <% end %>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+    </header>
+
     <%= yield %>
+
+    <!-- FOOTER-->
+    <footer class="text-muted">
+      <div class="container">
+        <br>
+        <p class="float-right">
+          <a href="#">Retour au début</a>
+        </p>
+        <p>&copy; EvenTually, marque déposé.</p>
+        <p>Concu par Rémi BARNAT</p>
+      </div>
+    </footer>
   </body>
 
   <!-- Optional JavaScript -->

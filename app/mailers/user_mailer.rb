@@ -16,6 +16,6 @@ class UserMailer < ApplicationMailer
     @user = user
     @event = event
     @url = 'https://event-ually.herokuapp.com/event/' + @event.id.to_s
-    mail(to: @event.event_admin.email, subject: '+1 participant pour ton event !')
+    mail(to: @event.event_admin.email, subject: 'Un nouveau participant pour ton event !')
   end
 end

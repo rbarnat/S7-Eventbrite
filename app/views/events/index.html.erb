@@ -1,0 +1,77 @@
+<section class="jumbotron text-center" style="background: url(https://images.pexels.com/photos/1387174/pexels-photo-1387174.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260) no-repeat center center;background-size: cover; padding: 10%">
+  <div class="container">
+    <h1 class="jumbotron-heading text-white font-weight-bold">EvenTually</h1>
+  </div>
+</section>
+
+   
+<!-- RESUME -->
+<h4 class="text-center">Tu aimes vivre des expériences ? Ca tombe bien, tu vas être servi !</h4>
+<div class="card-deck mx-4 my-4">
+  <div class="card">
+    <div class="card-body text-center">
+      <h1 class="card-title text-center"><i class="fas fa-eye"></i></h1>
+      <p class="card-text">Consulte notre sélection d'event les plus palpitants !</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body text-center">
+    <h1 class="card-title text-center"><i class="fas fa-plus-circle"></i></h1>
+      <p class="card-text">Tu as une idée qui roxe du poney ? Créé tes propres events.</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body text-center">
+    <h1 class="card-title text-center"><i class="fas fa-pen-square"></i></h1>
+      <p class="card-text">Modifie tes events pour les tenirs à jour et en informer les participants.</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body text-center">
+    <h1 class="card-title text-center"><i class="fas fa-trash-alt"></i></h1>
+      <p class="card-text">Supprimer les events qui ne sont plus d'actualité : Pfff So 2019 !</p>
+    </div>
+  </div>
+</div>
+
+
+<div class="album py-5 bg-light">
+  <div class="container">
+    <div class="row">
+
+      <% @events.each do |event| %>
+        <div class="col-md-4">
+          <div class="card mb-4 box-shadow">
+            <!--<img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">-->
+            <!--<img class="card-img-top" src="https://images.pexels.com/photos/2014775/pexels-photo-2014775.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="Card image cap">-->
+            <div class="card-body">
+              <h5 class="card-title"><%= event.title %></h5>
+              <p class="card-text"><%= event.description %></p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a href="<%= event_path(event.id) %>" class="btn btn-sm btn-outline-secondary">Voir</a>
+                  <% if user_signed_in? && current_user.id == event.event_admin.id %>
+                    <a href="<%= edit_event_path(event.id) %>" class="btn btn-sm btn-outline-secondary">Modifier</a>
+                  <% end %>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <small  class="text">Début <%= event.start_date.strftime("le %d/%m/%Y à %k:%M") %></small>
+                <small  class="text">Durée : <%= event.duration %> min.</small>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <small  class="text"><%= event.price %>€</small>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <small  class="text">🏠<%= event.location %></small>
+                <a href="<%= user_path(event.event_admin.id) %>"><small  class="text-muted">🙃<%= event.event_admin.first_name + ' ' + event.event_admin.last_name %></small></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      
+      
+    </div>
+  </div>
+</div>
