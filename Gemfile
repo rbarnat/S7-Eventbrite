@@ -53,12 +53,12 @@ end
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'table_print'
-  gem 'faker'
   gem 'letter_opener'
 end
 # gem 'execjs'
 # gem 'therubyracer'
+gem 'table_print'
+gem 'faker'
 gem 'dotenv-rails'
 gem 'bcrypt'
 gem 'jquery-rails'
