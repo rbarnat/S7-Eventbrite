@@ -8,7 +8,7 @@
 require 'faker'
 Faker::Config.locale = 'fr'
 
-# Attendance.destroy_all
+Attendance.destroy_all
 Event.destroy_all
 User.destroy_all
 
@@ -52,7 +52,7 @@ puts "Nombre de Users créés : #{User.all.count}/30"
     description: quote,
     price: rand(1..1000),
     location: Faker::TvShows::Simpsons.location,
-    user_id: User.ids.sample
+    event_admin_id: User.ids.sample
     )
 end
 puts "Nombre d'Events créés : #{Event.count}/20"

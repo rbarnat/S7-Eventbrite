@@ -1,7 +1,8 @@
 class Event < ApplicationRecord
-  # belongs_to :user
   has_many :attendances
   has_many :users, through: :attendances
+
+  belongs_to :event_admin, class_name: 'User'
 
 
   #DATE DE DEBUT
