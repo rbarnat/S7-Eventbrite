@@ -15,7 +15,7 @@ class UserMailer < ApplicationMailer
   def new_attendance_email(user, event)
     @user = user
     @event = event
-    @url = 'https://event-ually.herokuapp.com/event/' + @event.id 
+    @url = 'https://event-ually.herokuapp.com/event/' + @event.id.to_s
     mail(to: @user.email, subject: '+1 participant pour ton event !')
   end
 end
