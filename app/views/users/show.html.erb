@@ -30,7 +30,21 @@
         <h4 class="mb-2">
           Events créés par l'utilisateur
         </h4>
-        
+
+        <% if @user.admin_events.count > 0 %>
+          <% @user.admin_events.each do |event| %>
+            <div class="card mb-2">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                  <medium ><%= event.title %></medium>
+                  <a href="<%= event_path(event.id) %>" class="btn btn-sm btn-outline-secondary">Voir</a>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          Aucun event créé pour le moment.
+        <% end %>
       </div>
       
 
