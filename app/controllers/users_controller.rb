@@ -1,11 +1,19 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :show, :edit, :update, :destroy]
+  # before_action :is_user_current_user?, only: [:show, :edit, :update, :destroy]
+
   def index
     @users = User.all
   end
 
   def show
-    @user = User.find(params[:id])
-    @events = Event.find_by(event_admin_id: params[:id])
+    if is_user_current_user?
+      @user = User.find(params[:id])
+      @events = Event.find_by(event_admin_id: params[:id])
+    else
+      flash[:danger] = "Vous n'avez pas l'autisation de consulter ce profil."
+      redirect_to root_path
+    end
   end
 
   def new
@@ -47,7 +55,20 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
+  def is_user_current_user?
+    @user = User.find(params[:id])
+    puts "user_signed_in?  " + user_signed_in?.to_s
+    puts "@user.id == current_user.id  " + (@user.id == current_user.id).to_s
+    puts "@user.id  " + @user.id.to_s
+    puts "current_user.id  " + current_user.id.to_s
+    return user_signed_in? && @user.id == current_user.id
+  end
+
+  private
+
   def post_params
     param.require(:user).permit(:email, :password, :password_confirmation, :description, :first_name, :last_name)
   end
+
+  
 end
