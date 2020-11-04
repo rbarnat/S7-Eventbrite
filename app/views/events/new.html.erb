@@ -1,7 +1,15 @@
+<% if @event.errors.any? %>
+  <div class="alert alert-danger" role="alert">
+    <ul>
+      <% @event.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <h1 class="text-center">Création d'un event</h1>
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
 
 <div class="album py-5 bg-light">
   <div class="container">

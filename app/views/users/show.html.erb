@@ -1,5 +1,15 @@
 <h1 class="text-center">Utilisateur <%= @user.first_name + " " + @user.last_name %> </h1>
 
+<% if @user.errors.any? %>
+  <div class="alert alert-danger" role="alert">
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <div class="album py-5 bg-light">
   <div class="container">
     <div class="row">
