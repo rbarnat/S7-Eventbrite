@@ -10,7 +10,7 @@ class Event < ApplicationRecord
   validate :start_must_be_in_future
   def start_must_be_in_future
     errors.add(:start_date, "la date doit être postérieure à aujourd'hui") unless
-      start_date >= Time.now
+      (start_date && start_date >= Time.now)
   end 
 
   #DUREE
@@ -18,7 +18,7 @@ class Event < ApplicationRecord
   validate :duration_must_be_multiple_of_5
   def duration_must_be_multiple_of_5
     errors.add(:duration, "la duréé doit être un multiple de 5") unless
-      duration % 5 == 0
+      (duration && duration % 5 == 0)
   end 
   
   #TITRE

@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
+
   def index
     @events = Event.all
   end
@@ -18,12 +20,12 @@ class EventsController < ApplicationController
                         description: params[:description],
                         price: params[:price],
                         location: params[:location],
-                        event_admin_id: params[:event_admin_id])
+                        event_admin_id: current_user.id)
 
     if @event.save # essaie de sauvegarder en base @event
       # si ça marche, il redirige vers la page d'index du site
       flash[:success] = "L'event a bien été créé."
-      redirect_to events_path
+      redirect_to event_path(@event.id)
     else
       # sinon, il render la view new (qui est celle sur laquelle on est déjà)
       flash.now[:danger] = "L'event n'a pas été créé."
