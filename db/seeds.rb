@@ -30,11 +30,13 @@ User.destroy_all
   # puts "character>#{character}< ||  first_n>#{first_n}<   last_n>#{last_n}<"
   first_n = Faker::Name.first_name
   last_n = Faker::Name.last_name
+  psw = Faker::Ancient.god
   u = User.create(
     first_name: first_n,
     last_name: last_n,
-    email: first_n[0] + last_n + "@yopmail.com",
-    # encrypted_password: "",
+    email: first_n[0].downcase + last_n.downcase + "@yopmail.com",
+    password: psw,
+    password_confirmation: psw,
     description: Faker::TvShows::Simpsons.quote
     )
     # puts first_n[0] + last_n + "@yopmail.com"

@@ -1,2 +1,59 @@
-<h1>Events#show</h1>
-<p>Find me in app/views/events/show.html.erb</p>
+<h1 class="text-center">Event <%= @event.title %> </h1>
+
+
+<div class="album py-5 bg-light">
+  <div class="container">
+    <div class="row">
+
+      <!-- EVENT -->
+      <div class="container mb-2">
+        <div class="card mb-4 box-shadow">
+          <!--<img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">-->
+          <div class="card-body">
+            <small class="text-muted">#<%= @event.id %></small>
+            <h3 class="card-title"><%= @event.title %></h3>
+            <p class="card-text"><%= @event.description %></p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <% if user_signed_in? && current_user.id == @event.event_admin.id %>
+                  <a href="<%= edit_event_path(@event.id) %>" class="btn btn-sm btn-outline-secondary">Modifier</a>
+                  <a href="<%= event_path(@event.id) %>" class="btn btn-sm btn-danger" data-confirm="Etes-vous sur de vouloir supprimer l'event ?" data-method="DELETE">Supprimer</a>
+                <% end %>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+              <small  class="text">🏠<%= @event.location %></small>
+              <small  class="text"><%= @event.users.count %> participants</small>
+              <a href="<%= user_path(@event.event_admin.id) %>"><small  class="text-muted">🙃<%= @event.event_admin.first_name + ' ' + @event.event_admin.last_name %></small></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PARTICIPANTS -->
+      <div class="col-md-8 mb-4">
+        <h4 class="mb-2">
+          Participants
+        </h4>
+        <% @event.users.each do |user| %>
+          <div class="card mb-2">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center">
+                <a href="<%= user_path(user.id) %>"><small  class="text-muted">🙃<%= user.first_name + ' ' + user.last_name %></small></a>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      
+
+    </div>
+
+    <div class="text-left">
+      <a href="<%= root_path %>" class="btn my-2 btn-outline-secondary">Retour à l'accueil</a>
+    </div>
+
+  </div>
+
+
+</div>
