@@ -47,7 +47,7 @@
                   Mon profil
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a href="<%= edit_user_registration_path(current_user.id) %>" class="dropdown-item" href="#">Mon profil</a>
+                    <a href="<%= user_path(current_user.id) %>" class="dropdown-item" href="#">Mon profil</a>
                     <a href="<%= destroy_user_session_path(session[:user_id]) %>" data-confirm="Etes-vous sur de vouloir vous déconnecter ?" data-method="DELETE" class="dropdown-item">Se déconnecter</a>
                   </div>
                 </div>
