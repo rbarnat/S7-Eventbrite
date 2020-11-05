@@ -25,7 +25,7 @@ class EventsController < ApplicationController
     if @event.save # essaie de sauvegarder en base @event
       # si ça marche, il redirige vers la page d'index du site
       flash[:success] = "L'event a bien été créé."
-      redirect_to event_path(@event.id)
+      redirect_to @event
     else
       # sinon, il render la view new (qui est celle sur laquelle on est déjà)
       flash.now[:danger] = "L'event n'a pas été créé."

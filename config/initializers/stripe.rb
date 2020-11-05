@@ -3,4 +3,4 @@ Rails.configuration.stripe = {
   :secret_key      => ENV['STRIPE_PWD']
 }
 
-Stripe.api_key = Rails.configuration.stripe[:secret_key]
+Stripe.api_key = Rails.configuration.stripe[:secret_key] 
