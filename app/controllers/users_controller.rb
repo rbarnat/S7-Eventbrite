@@ -44,8 +44,15 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.update(post_params)
-    redirect_to user_path
+    if @user.update(description: params[:description], 
+                    first_name: params[:first_name], 
+                    last_name: params[:last_name])
+      flash[:success] = "L'utilisateur a bien été modifié."
+      redirect_to @user
+    else
+      flash[:danger] = "L'utilisateur n'a pas été modifié."
+      render :edit
+    end
   end
 
   def destroy
