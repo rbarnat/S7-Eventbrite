@@ -1,6 +1,7 @@
 class AttendancesController < ApplicationController
   def index
-    @attendance = Attendance.all
+    @event = Event.find(params[:event_id])
+    @attendances = Attendance.find_by(event_id: params[:event_id])
   end
 
   def show
