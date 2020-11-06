@@ -12,6 +12,8 @@ class User < ApplicationRecord
 
   has_many :admin_events, foreign_key: "event_admin_id", class_name: "Event", dependent: :destroy
 
+  has_one_attached :avatar
+
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, presence: true, uniqueness: true, format: { with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/, message: "Renseigne un email valide." }

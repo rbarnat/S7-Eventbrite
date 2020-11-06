@@ -61,3 +61,6 @@ gem 'dotenv-rails'
 gem 'bcrypt'
 gem 'devise'
 gem 'stripe'
+group :production do
+  gem "aws-sdk-s3", require: false
+end

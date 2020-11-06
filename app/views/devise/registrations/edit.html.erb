@@ -51,6 +51,12 @@
         </div>
       <% end %>
       <br /><br /><br />
+      <h3>Changer d'avatar ?</h3>
+      <%= form_tag user_avatars_path(@user), multipart: true do %>
+        <%= file_field_tag :avatar %>
+        <%= submit_tag "mettre à jour" %>
+      <% end %>
+      <br /><br /><br />
       <h3 class="h3 mb-3 font-weight-normal">Supprimer mon compte</h3>
       <p>Pas satisfait ?</p>
       <%= button_to "Supprimer mon compte", registration_path(resource_name), data: { confirm: "Etes-vous sûr de vouloir supprimer le compte ?" }, method: :delete, class: "btn btn-lg btn-danger btn-block" %>
