@@ -11,7 +11,7 @@
 <h1 class="text-center">Utilisateur <%= @user.first_name + " " + @user.last_name %> </h1>
 
 <%if @user.avatar.attached?%>
-  <%= image_tag @user.avatar, alt: 'avatar' %>
+  <%= image_tag @user.avatar.variant(resize: "400x400" ), alt: 'avatar' %>
 <%else%>
   <p>=== Il n'y a pas encore d'avatar lié à cet utilisateur ===</p>
 <%end%>

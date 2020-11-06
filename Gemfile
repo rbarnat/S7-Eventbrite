@@ -64,3 +64,5 @@ gem 'stripe'
 group :production do
   gem "aws-sdk-s3", require: false
 end
+gem 'mini_magick'
+gem 'image_processing'
