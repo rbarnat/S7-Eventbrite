@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :redirect_if_user_not_event_admin, only: [:edit, :update, :destroy]
 
   def index
     @events = Event.all
@@ -39,8 +40,13 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
-    @event.update(post_params)
-    redirect_to event_path
+    if @event.update(post_params)
+      flash[:success] = "L'event a bien été modifié."
+      redirect_to @event
+    else
+      flash[:danger] = "L'event n'a pas été modifié."
+      render :edit
+    end
   end
 
   def destroy
@@ -49,7 +55,15 @@ class EventsController < ApplicationController
     redirect_to events_path
   end
 
+  def redirect_if_user_not_event_admin
+    @event = Event.find(params[:id])
+    if !(user_signed_in? && @event.event_admin.id == current_user.id)
+      flash[:danger] = "Vous n'avez pas l'autisation de gérer cet event."
+      redirect_to event_path
+    end
+  end
+
   def post_params
-    param.require(:event).permit(:start_date, :duration, :title, :description, :price, :location, :event_admin_id)
+    params.require(:event).permit(:start_date, :duration, :title, :description, :price, :location)
   end
 end

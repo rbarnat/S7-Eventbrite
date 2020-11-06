@@ -30,17 +30,25 @@
         <p>Pour participer à l'event, merci de procéder au paiement ci-dessous :</p>
         <article class="form-group h3 amount">
           <small><%= f.label :price, "Prix : " %><br></small>
-          <em><%= @attendance.event.price.to_s + " euros" %></em>
+          <% if is_event_free? %>
+            <em>Gratuit !</em>
+          <% else %>
+            <em><%= @attendance.event.price.to_s + " euros" %></em>
+          <% end %>
         </article>
-        <div class="actions">
-          <% # <%= f.submit "Participer", class: "btn btn-lg btn-primary btn-block" %>
-          <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                  data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                  data-description="EvenTually: inscription event"
-                  data-amount= "<%= @attendance.event.price * 100 %>%"
-                  data-currency= "eur"
-                  data-locale="auto"></script>
-        </div>
+
+        <% if is_event_free? %>
+          <%= f.submit "Participer gratuitement", class: "stripe-button" %>
+        <% else %>
+          <div class="actions">
+            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                    data-description="EvenTually: inscription event"
+                    data-amount= "<%= @attendance.event.price * 100 %>%"
+                    data-currency= "eur"
+                    data-locale="auto"></script>
+          </div>
+        <% end %>
       <% end %>
       <br /><br /><br />
       <%= link_to "Retour", :back %>
