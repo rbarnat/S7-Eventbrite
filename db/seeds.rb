@@ -40,7 +40,7 @@ User.destroy_all
     description: Faker::TvShows::Simpsons.quote
     )
     # puts first_n[0] + last_n + "@yopmail.com"
-    puts "--User créé : #{u.first_name + " " + u.last_name + " / " + u.email }"
+    # puts "--User créé : #{u.first_name + " " + u.last_name + " / " + u.email }"
 end
 puts "Nombre de Users créés : #{User.all.count}/30"
 
