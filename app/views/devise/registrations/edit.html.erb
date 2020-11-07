@@ -51,10 +51,18 @@
         </div>
       <% end %>
       <br /><br /><br />
-      <h3>Changer d'avatar ?</h3>
+      <h3>Ton image de profil</h3>
       <%= form_tag user_avatars_path(@user), multipart: true do %>
-        <%= file_field_tag :avatar %>
-        <%= submit_tag "mettre à jour" %>
+        <div class="form-group">
+          <%= label_tag :current_avatar, "Actuellement :" %><br>
+          <%= image_tag @user.avatar_medium, alt: 'avatar' %>
+          <br>
+          <%= label_tag :new_avatar, "Changer :" %>   
+          <%= file_field_tag :avatar , class: "form-control"%>
+          <div class="actions mt-5">
+            <%= submit_tag "Modifier l'image", class: "btn btn-lg btn-secondary btn-block" %>
+          </div>
+        </div>
       <% end %>
       <br /><br /><br />
       <h3 class="h3 mb-3 font-weight-normal">Supprimer mon compte</h3>

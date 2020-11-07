@@ -44,7 +44,7 @@
               <% if user_signed_in? %>
               <div class="dropdown">
                   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Mon profil
+                  <%= image_tag(current_user.avatar_thumbnail)%>  Mon profil
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a href="<%= user_path(current_user.id) %>" class="dropdown-item" href="#">Mon profil</a>

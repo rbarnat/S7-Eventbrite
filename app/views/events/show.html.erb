@@ -27,7 +27,7 @@
             <div class="d-flex justify-content-between align-items-center">
               <small  class="text">🏠<%= @event.location %></small>
               <small  class="text"><%= @event.users.count %> participants</small>
-              <a href="<%= user_path(@event.event_admin.id) %>"><small  class="text-muted">🙃<%= @event.event_admin.first_name + ' ' + @event.event_admin.last_name %></small></a>
+              <a href="<%= user_path(@event.event_admin.id) %>"><small  class="text-muted"><%= image_tag(@event.event_admin.avatar_thumbnail)%><%= @event.event_admin.first_name + ' ' + @event.event_admin.last_name %></small></a>
             </div>
           </div>
         </div>
@@ -56,7 +56,7 @@
             <div class="card mb-2">
               <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
-                  <a href="<%= user_path(user.id) %>"><small  class="text-muted">🙃<%= user.first_name + ' ' + user.last_name %></small></a>
+                  <a href="<%= user_path(user.id) %>"><small  class="text-muted"><%= image_tag(user.avatar_thumbnail)%><%= user.first_name + ' ' + user.last_name %></small></a>
                 </div>
               </div>
             </div>

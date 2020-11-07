@@ -10,11 +10,7 @@
 
 <h1 class="text-center">Utilisateur <%= @user.first_name + " " + @user.last_name %> </h1>
 
-<%if @user.avatar.attached?%>
-  <%= image_tag @user.avatar.variant(resize: "400x400" ), alt: 'avatar' %>
-<%else%>
-  <p>=== Il n'y a pas encore d'avatar lié à cet utilisateur ===</p>
-<%end%>
+
 
 <div class="album py-5 bg-light">
   <div class="container">
@@ -25,6 +21,9 @@
         <div class="card mb-4 box-shadow">
           <!--<img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">-->
           <div class="card-body">
+            <div class="card-image">
+              <%= image_tag @user.avatar_medium, alt: 'avatar' %><br>
+            </div>
             <small class="text-muted">#<%= @user.id %></small>
             <h3 class="card-title"><%= @user.first_name + " " + @user.last_name %></h3>
             <h5 class="card-title"><%= @user.email%></h5>
