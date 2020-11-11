@@ -29,7 +29,8 @@ class EventsController < ApplicationController
       redirect_to @event
     else
       # sinon, il render la view new (qui est celle sur laquelle on est déjà)
-      flash.now[:danger] = "L'event n'a pas été créé."
+      flash.now[:error] = "La création de l'event a échoué."
+      flash.now[:error] = @event.errors.full_messages.to_sentence
       render :new
     end
   end
@@ -44,15 +45,22 @@ class EventsController < ApplicationController
       flash[:success] = "L'event a bien été modifié."
       redirect_to @event
     else
-      flash[:danger] = "L'event n'a pas été modifié."
+      flash.now[:error] = "L'event n'a pas été modifié."
+      flash.now[:error] = @event.errors.full_messages.to_sentence
       render :edit
     end
   end
 
   def destroy
     @event = Event.find(params[:id])
-    @event.destroy
-    redirect_to events_path
+    if @event.destroy
+      flash[:success] = "L'event a bien été supprimée."
+      redirect_to events_path
+    else
+      flash[:error] = "L'event n'a pas été supprimée."
+      flash[:error] = @event.errors.full_messages.to_sentence
+      redirect_to root_path
+    end
   end
 
   def redirect_if_user_not_event_admin

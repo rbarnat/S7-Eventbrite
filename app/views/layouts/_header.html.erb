@@ -1,0 +1,49 @@
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+    <a class="navbar-brand" href="<%= root_path %>">EvenTually</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="<%= root_path %>">Accueil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= events_path %>">Events</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= new_event_path %>">Créer un Event</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">A propos</a>
+        </li>
+      </ul>
+      <div class="navbar-nav dropdown" id="navbarColor01">
+        <% if user_signed_in? %>
+          <button class="nav-link btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= image_tag(current_user.avatar_thumbnail)%>  Mon profil
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a href="<%= user_path(current_user.id) %>" class="dropdown-item" href="#">Mon profil</a>
+            <% if user_is_admin? %>
+              <a href="<%= admins_index_path %>" class="dropdown-item" href="#"><span>Espace ADMIN</span></a>
+            <% end %>
+            <a href="<%= destroy_user_session_path(session[:user_id]) %>" data-confirm="Etes-vous sur de vouloir vous déconnecter ?" data-method="DELETE" class="dropdown-item">Se déconnecter</a>
+          </div>
+        <% else %>
+          <button class="nav-link btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          S'inscrire / Se connecter
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="<%= new_user_registration_path %>">S'inscrire</a>
+            <a class="dropdown-item" href="<%= new_user_session_path %>">Se connecter</a>
+          </div>
+        <% end %>
+
+      </div>
+
+    </div>
+  </nav>
+</header>

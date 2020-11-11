@@ -45,15 +45,16 @@ class AttendancesController < ApplicationController
     
 
     if @attendance.save # essaie de sauvegarder en base
-    # si ça marche, il redirige vers la page d'index du site
-    puts "Vous participez désormais à l'événement."
-    flash[:success] = "Vous participez désormais à l'événement."
-    redirect_to event_path(params[:event_id])
+      # si ça marche, il redirige vers la page d'index du site
+      puts "Vous participez désormais à l'événement."
+      flash[:success] = "Vous participez désormais à l'événement."
+      redirect_to event_path(params[:event_id])
     else
-    # sinon, il render la view new (qui est celle sur laquelle on est déjà)
-    puts "La participation à l'événement a échoué."
-    flash.now[:danger] = "La participation à l'événement a échoué."
-    render :new
+      # sinon, il render la view new (qui est celle sur laquelle on est déjà)
+      puts "La participation à l'événement a échoué."
+      flash.now[:error] = "La participation à l'événement a échoué."
+      flash.now[:error] = @attendance.errors.full_messages.to_sentence
+      render :new
     end
 
     # STRIPE section 2
@@ -69,14 +70,27 @@ class AttendancesController < ApplicationController
 
   def update
     @attendance = Attendance.find(params[:id])
-    @attendance.update(post_params)
-    redirect_to event_path
+    
+    if @attendance.update(post_params)
+      flash[:success] = "La participation à l'événement a bien été mise à jour."
+      redirect_to event_path
+    else
+      flash.now[:error] = "La participation à l'événement a échoué."
+      flash.now[:error] = @attendance.errors.full_messages.to_sentence
+      render :edit
+    end
   end
 
   def destroy
     @attendance = Attendance.find(params[:id])
-    @attendance.destroy
-    redirect_to events_path
+    if @attendance.destroy
+      flash[:success] = "La participation à l'événement a bien été supprimée."
+      redirect_to events_path
+    else
+      flash[:error] = "La participation à l'événement n'a pas été supprimée."
+      flash[:error] = @attendance.errors.full_messages.to_sentence
+      redirect_to event_path
+    end
   end
 
   def post_params

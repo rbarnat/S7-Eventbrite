@@ -28,7 +28,8 @@ class UsersController < ApplicationController
       redirect_to users_path
     else
       # sinon, il render la view new (qui est celle sur laquelle on est déjà)
-      flash.now[:danger] = "L'utilisateur n'a pas été créé."
+      flash.now[:error] = "L'utilisateur n'a pas été créé."
+      flash.now[:error] = @user.errors.full_messages.to_sentence
       render :new
     end
   end
@@ -45,15 +46,22 @@ class UsersController < ApplicationController
       flash[:success] = "L'utilisateur a bien été modifié."
       redirect_to @user
     else
-      flash[:danger] = "L'utilisateur n'a pas été modifié."
+      flash.now[:error] = "L'utilisateur n'a pas été modifié."
+      flash.now[:error] = @user.errors.full_messages.to_sentence
       render :edit
     end
   end
 
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
-    redirect_to users_path
+    if @user.destroy
+      flash[:success] = "L'utilisateur a bien été supprimé."
+      redirect_to root_path
+    else
+      flash[:error] = "L'utilisateur n'a pas été supprimé."
+      flash[:error] = @user.errors.full_messages.to_sentence
+      redirect_to root_path
+    end
   end
 
   def is_user_current_user?

@@ -37,7 +37,8 @@ User.destroy_all
     email: first_n[0].downcase + last_n.downcase + "@yopmail.com",
     password: psw,
     password_confirmation: psw,
-    description: Faker::TvShows::Simpsons.quote
+    description: Faker::TvShows::Simpsons.quote,
+    is_admin: false
     )
     # puts first_n[0] + last_n + "@yopmail.com"
     puts "--User créé : #{u.first_name + " " + u.last_name + " / " + u.email }"
